@@ -16,5 +16,5 @@ const toDoList = createSlice({
     }
 });
 
-export const { addToDo, addDone } = toDoList.actions
+export const { addToDo, addDone, addDoing } = toDoList.actions
 export default toDoList;

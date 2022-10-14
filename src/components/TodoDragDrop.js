@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd"
 import { useSelector, useDispatch } from "react-redux";
 import TodoDraggable from "./TodoDraggable";
+import Form from "./Form";
 
 const Wrap = styled.div`
     display: flex;
@@ -51,45 +52,50 @@ const TodoDragDrop = () => {
     const done = useSelector(state=>state.toDoList.value["DONE"]);
     const onDragEnd = () => {}
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <Wrap>
-                <Boards>
-                    <UpperDroppable>
-                        <Title>TODO</Title>
-                        <Droppable droppableId="TODO">
-                            {(magic)=>(
-                                <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
-                                    {toDos.map((prop,ind)=> <TodoDraggable key={ind} dragId={prop+""} index={ind}/>)}
-                                    {magic.placeholder}
-                                </UnderDroppable>
-                            )}
-                        </Droppable>
-                    </UpperDroppable>
-                    <UpperDroppable>
-                        <Title>DOING...</Title>
-                        <Droppable droppableId="DOING...">
-                        {(magic)=>(
-                                <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
-                                    {doings.map((prop,ind)=> <TodoDraggable key={ind} dragId={prop+""} index={ind}/>)}
-                                    {magic.placeholder}
-                                </UnderDroppable>
-                            )}
-                        </Droppable>
-                    </UpperDroppable>
-                    <UpperDroppable>
-                        <Title>DONE</Title>
-                        <Droppable droppableId="DONE">
-                        {(magic)=>(
-                                <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
-                                    {done.map((prop,ind)=> <TodoDraggable key={ind} dragId={prop+""} index={ind}/>)}
-                                    {magic.placeholder}
-                                </UnderDroppable>
-                            )}
-                        </Droppable>
-                    </UpperDroppable>
-                </Boards>
-            </Wrap>
-        </DragDropContext>
+        <>
+            <DragDropContext onDragEnd={onDragEnd}> 
+                <Wrap>
+                    <div style={{display:"block"}}>
+                        <Form />
+                        <Boards>
+                            <UpperDroppable>
+                                <Title>TODO</Title>
+                                <Droppable droppableId="TODO">
+                                    {(magic) => (
+                                        <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
+                                            {toDos.map((prop, ind) => <TodoDraggable key={ind} dragId={prop.id+""} index={ind} />)}
+                                            {magic.placeholder}
+                                        </UnderDroppable>
+                                    )}
+                                </Droppable>
+                            </UpperDroppable>
+                            <UpperDroppable>
+                                <Title>DOING...</Title>
+                                <Droppable droppableId="DOING...">
+                                    {(magic) => (
+                                        <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
+                                            {doings.map((prop, ind) => <TodoDraggable key={ind} dragId={prop.id+""} index={ind} />)}
+                                            {magic.placeholder}
+                                        </UnderDroppable>
+                                    )}
+                                </Droppable>
+                            </UpperDroppable>
+                            <UpperDroppable>
+                                <Title>DONE</Title>
+                                <Droppable droppableId="DONE">
+                                    {(magic) => (
+                                        <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
+                                            {done.map((prop, ind) => <TodoDraggable key={ind} dragId={prop.id+""} index={ind} />)}
+                                            {magic.placeholder}
+                                        </UnderDroppable>
+                                    )}
+                                </Droppable>
+                            </UpperDroppable>
+                        </Boards>
+                    </div>
+                </Wrap>
+            </DragDropContext>
+        </>
     );
 }
 
