@@ -3,6 +3,7 @@ import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautif
 import { useSelector, useDispatch } from "react-redux";
 import TodoDraggable from "./TodoDraggable";
 import Form from "./Form";
+import { deleteValue, insertValue } from "../store/modules/toDoList";
 
 const Wrap = styled.div`
     display: flex;
@@ -47,10 +48,11 @@ const UnderDroppable = styled.div`
 // 폼 작성후 드로파블 아래 내용 수정하기
 const TodoDragDrop = () => {
     const dispatch = useDispatch();
-    const toDos = useSelector(state=>state.toDoList.value["TO_DO"]);
-    const doings = useSelector(state=>state.toDoList.value["DOING"]);
-    const done = useSelector(state=>state.toDoList.value["DONE"]);
-    const onDragEnd = () => {}
+    const getAll = useSelector(state=>state.toDoList.value);
+    const onDragEnd = (info) => {
+        dispatch(deleteValue([info.source.droppableId, info.source.index]))
+        dispatch(insertValue([info.destination.droppableId, info.destination.index, getAll[info.source.droppableId][info.source.index]]));
+    }
     return (
         <>
             <DragDropContext onDragEnd={onDragEnd}> 
@@ -60,10 +62,10 @@ const TodoDragDrop = () => {
                         <Boards>
                             <UpperDroppable>
                                 <Title>TODO</Title>
-                                <Droppable droppableId="TODO">
+                                <Droppable droppableId="TO_DO">
                                     {(magic) => (
                                         <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
-                                            {toDos.map((prop, ind) => <TodoDraggable key={ind} dragId={prop.id+""} index={ind} />)}
+                                            {getAll["TO_DO"].map((prop, ind) => <TodoDraggable key={prop.id+""} dragId={prop.id+""} index={ind} dropName="TO_DO"/>)}
                                             {magic.placeholder}
                                         </UnderDroppable>
                                     )}
@@ -71,10 +73,10 @@ const TodoDragDrop = () => {
                             </UpperDroppable>
                             <UpperDroppable>
                                 <Title>DOING...</Title>
-                                <Droppable droppableId="DOING...">
+                                <Droppable droppableId="DOING">
                                     {(magic) => (
                                         <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
-                                            {doings.map((prop, ind) => <TodoDraggable key={ind} dragId={prop.id+""} index={ind} />)}
+                                            {getAll["DOING"].map((prop, ind) => <TodoDraggable key={prop.id+""} dragId={prop.id+""} index={ind} dropName="DOING"/>)}
                                             {magic.placeholder}
                                         </UnderDroppable>
                                     )}
@@ -85,7 +87,7 @@ const TodoDragDrop = () => {
                                 <Droppable droppableId="DONE">
                                     {(magic) => (
                                         <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
-                                            {done.map((prop, ind) => <TodoDraggable key={ind} dragId={prop.id+""} index={ind} />)}
+                                            {getAll["DONE"].map((prop, ind) => <TodoDraggable key={prop.id+""} dragId={prop.id+""} index={ind} dropName="DONE"/>)}
                                             {magic.placeholder}
                                         </UnderDroppable>
                                     )}

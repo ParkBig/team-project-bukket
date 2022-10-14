@@ -12,9 +12,15 @@ const toDoList = createSlice({
         },
         addDoing: (state, action) => {
             state.value["DOING"].push(action.payload);
+        },
+        insertValue: (state, action) => {
+            state.value[action.payload[0]].splice(action.payload[1],0,action.payload[2]);
+        },
+        deleteValue: (state, action) => {
+            state.value[action.payload[0]].splice(action.payload[1],1)
         }
     }
 });
 
-export const { addToDo, addDone, addDoing } = toDoList.actions
+export const { addToDo, addDone, addDoing, insertValue, deleteValue } = toDoList.actions
 export default toDoList;

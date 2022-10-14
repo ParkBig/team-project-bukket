@@ -12,9 +12,9 @@ const Wrapper = styled.div`
 `;
 
 //요기서는 제목만 보이게 하자.
-const TodoDraggable = ({dragId , index}) => {
+const TodoDraggable = ({dragId , index, dropName}) => {
     const dispatch = useDispatch();
-    const toDo = useSelector(state=>state.toDoList.value["TO_DO"])[index];
+    const toDo = useSelector(state=>state.toDoList.value[dropName])[index];
     return (
         <Draggable draggableId={dragId} index={index}>
             {(magic) =>
