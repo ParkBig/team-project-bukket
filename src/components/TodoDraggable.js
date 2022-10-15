@@ -5,10 +5,13 @@ import styled from "styled-components";
 const Wrapper = styled.div`
     height: 40px;
     border: 1px solid;
-    margin: 13px auto;
+    margin: 9px auto;
+    margin-left: 8px;
     text-align: center;
     font-size: larger;
     border-radius: 10px;
+    background-color: white;
+    border-color: aliceblue;
 `;
 
 //요기서는 제목만 보이게 하자.

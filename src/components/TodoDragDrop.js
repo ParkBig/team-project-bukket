@@ -4,22 +4,22 @@ import { useSelector, useDispatch } from "react-redux";
 import TodoDraggable from "./TodoDraggable";
 import Form from "./Form";
 import { deleteValue, insertValue } from "../store/modules/toDoList";
+import trashImg from "../img/icons8-trash-64.png"
 
 const Wrap = styled.div`
     display: flex;
-    width: 100vw;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: gray;
+    background-color: rgba(168, 153, 143, 0.43);
 `;
 const Boards = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-start;
     width: 100%;
-    gap: 10px;
+    gap: 20px;
 `;
 const UpperDroppable = styled.div`
     width: 400px;
@@ -28,29 +28,60 @@ const UpperDroppable = styled.div`
     border-radius: 15px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     padding: 10px;
+    background-color: #DADFE9;
 `;
 const Title = styled.div`
-    width: 400px;
-    height: 50px;
+    width: 90%;
     border-radius: 15px;
-    box-shadow: 5px 10px 15px 5px gray;
+    box-shadow: -1px 5px 15px 2px ${(prop)=>prop.bgColor};
     text-align: center;
-    padding-top: 20px;
+    padding: 10px;
+    margin: auto;
+    background-color: ${(prop)=>prop.bgColor};
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
 `;
 const UnderDroppable = styled.div`
     flex-grow: 1;
     transition: background-color 0.3s ease-in-out;
-    padding: 20px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px 20px 10px 20px;
+    overflow: scroll;
+    background-color: transparent;
+    border-radius: 15px;
+    width: 88%;
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 0;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #424242;
+        border-radius: 50px;
+    }
+`;
+const TrashWrap = styled.div`
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #DADFE9;
+    border-radius: 30px;
+`;
+const TrashImg = styled.img`
+    width: 100px;
+    height: 100px;
+    margin: 25px;
 `;
 
-// 폼 작성후 드로파블 아래 내용 수정하기
 const TodoDragDrop = () => {
     const dispatch = useDispatch();
     const getAll = useSelector(state=>state.toDoList.value);
     const onDragEnd = (info) => {
-        dispatch(deleteValue([info.source.droppableId, info.source.index]))
+        if (!info.destination) return;
+        if (info.destination.droppableId === "trash") return dispatch(deleteValue([info.source.droppableId, info.source.index]));
+        dispatch(deleteValue([info.source.droppableId, info.source.index]));
         dispatch(insertValue([info.destination.droppableId, info.destination.index, getAll[info.source.droppableId][info.source.index]]));
     }
     return (
@@ -61,7 +92,7 @@ const TodoDragDrop = () => {
                         <Form />
                         <Boards>
                             <UpperDroppable>
-                                <Title>TODO</Title>
+                                <Title bgColor="rgba(104, 142, 207, 1)">TODO</Title>
                                 <Droppable droppableId="TO_DO">
                                     {(magic) => (
                                         <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
@@ -72,7 +103,7 @@ const TodoDragDrop = () => {
                                 </Droppable>
                             </UpperDroppable>
                             <UpperDroppable>
-                                <Title>DOING...</Title>
+                                <Title bgColor="rgba(207, 137, 104, 1)">DOING...</Title>
                                 <Droppable droppableId="DOING">
                                     {(magic) => (
                                         <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
@@ -83,7 +114,7 @@ const TodoDragDrop = () => {
                                 </Droppable>
                             </UpperDroppable>
                             <UpperDroppable>
-                                <Title>DONE</Title>
+                                <Title bgColor="rgba(104, 207, 156, 1)">DONE</Title>
                                 <Droppable droppableId="DONE">
                                     {(magic) => (
                                         <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
@@ -94,8 +125,19 @@ const TodoDragDrop = () => {
                                 </Droppable>
                             </UpperDroppable>
                         </Boards>
+                        <TrashWrap>
+                            <Droppable droppableId="trash">
+                                {(magic)=> (
+                                    <div ref={magic.innerRef} {...magic.droppableProps}>
+                                        <TrashImg src={trashImg} />
+                                        {magic.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </TrashWrap>
                     </div>
                 </Wrap>
+                
             </DragDropContext>
         </>
     );

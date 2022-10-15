@@ -27,7 +27,7 @@ const GotoList = () => {
             <Button>
                 <Link to={"/todoList"} style={{textDecoration:"none"}}>
                     <Title>
-                        Start My Goal
+                        We' ll
                     </Title>
                 </Link>
             </Button>
