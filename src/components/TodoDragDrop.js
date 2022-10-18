@@ -5,9 +5,7 @@ import TodoDraggable from "./TodoDraggable";
 import Form from "./Form";
 import { deleteValue, getToDo, insertValue } from "../store/modules/toDoList";
 import trashImg from "../img/icons8-trash-64.png"
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { getData } from "../api";
+import { useEffect } from "react";
 import axios from "axios";
 
 const Wrap = styled.div`
@@ -16,7 +14,7 @@ const Wrap = styled.div`
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgba(168, 153, 143, 0.43);
+    background: linear-gradient(135deg, rgb(0, 224, 201), rgb(168, 139, 168));
 `;
 const Boards = styled.div`
     display: flex;
@@ -81,16 +79,12 @@ const TrashImg = styled.img`
     margin: 25px;
 `;
 
-
 const TodoDragDrop = () => {
     useEffect(() => {
         const getTodo = async () => {
-          const todo = await axios.get("http://localhost:3001/TO_DO");
-          dispatch(getToDo(["TO_DO", (todo.data)]));
-          const doing = await axios.get("http://localhost:3001/DOING");
-          dispatch(getToDo(["DOING", (doing.data)]));
-          const done = await axios.get("http://localhost:3001/DONE");
-          dispatch(getToDo(["DONE", (done.data)]));
+            dispatch(getToDo(["DOING", (await axios.get("http://localhost:3001/DOING")).data]));
+            dispatch(getToDo(["TO_DO", (await axios.get("http://localhost:3001/TO_DO")).data]));
+            dispatch(getToDo(["DONE", (await axios.get("http://localhost:3001/DONE")).data]));
         };
         getTodo();
       }, []);

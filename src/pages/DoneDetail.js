@@ -1,6 +1,7 @@
 // 파이팅!
 
 const DoneDetail = () => {
+
     return (
         <></>
     )

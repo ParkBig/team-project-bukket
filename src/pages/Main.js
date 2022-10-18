@@ -1,18 +1,26 @@
 import styled from "styled-components";
 import GotoList from "../components/GotoList";
+import Summary from "../components/Summary";
 
 const Div = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 400px;
+    height: 100vh;
+    background-color: #DADFE9;
+`;
+const UnderDiv = styled.div`
+    display: block;
 `;
 
 const Main = () => {
     return (
         <>
             <Div>
-                <GotoList/>
+                <UnderDiv>
+                    <GotoList/>
+                    <Summary/>
+                </UnderDiv>
             </Div>
         </>
     );

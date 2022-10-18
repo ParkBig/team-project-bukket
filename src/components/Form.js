@@ -26,7 +26,7 @@ const Span = styled.span`
     text-align: center;
     width: 25%;
     border: 0.5px solid;
-    background-color: #eee6c4;
+    background-color: #DADFE9;
 `;
 const Input = styled.input`
     width: 400px;
@@ -41,7 +41,7 @@ const Button = styled.button`
     width: 40px;
     height: 80px;
     margin: auto;
-    background-color: #eee6c4;
+    background-color: #DADFE9;
 `;
 const Div = styled.div`
     flex-direction: column;
