@@ -3,8 +3,12 @@ import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautif
 import { useSelector, useDispatch } from "react-redux";
 import TodoDraggable from "./TodoDraggable";
 import Form from "./Form";
-import { deleteValue, insertValue } from "../store/modules/toDoList";
+import { deleteValue, getToDo, insertValue } from "../store/modules/toDoList";
 import trashImg from "../img/icons8-trash-64.png"
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { getData } from "../api";
+import axios from "axios";
 
 const Wrap = styled.div`
     display: flex;
@@ -68,6 +72,8 @@ const TrashWrap = styled.div`
     margin-top: 50px;
     background-color: #DADFE9;
     border-radius: 30px;
+    align-items: center;
+    text-align: center;
 `;
 const TrashImg = styled.img`
     width: 100px;
@@ -75,14 +81,32 @@ const TrashImg = styled.img`
     margin: 25px;
 `;
 
+
 const TodoDragDrop = () => {
+    useEffect(() => {
+        const getTodo = async () => {
+          const todo = await axios.get("http://localhost:3001/TO_DO");
+          dispatch(getToDo(["TO_DO", (todo.data)]));
+          const doing = await axios.get("http://localhost:3001/DOING");
+          dispatch(getToDo(["DOING", (doing.data)]));
+          const done = await axios.get("http://localhost:3001/DONE");
+          dispatch(getToDo(["DONE", (done.data)]));
+        };
+        getTodo();
+      }, []);
     const dispatch = useDispatch();
     const getAll = useSelector(state=>state.toDoList.value);
-    const onDragEnd = (info) => {
+    const onDragEnd = async (info) => {
         if (!info.destination) return;
-        if (info.destination.droppableId === "trash") return dispatch(deleteValue([info.source.droppableId, info.source.index]));
+        if (info.destination.droppableId === "trash") {
+            await axios.delete(`http://localhost:3001/${info.source.droppableId}/${info.draggableId}`);
+            return dispatch(deleteValue([info.source.droppableId, info.source.index]));
+        }
+        await axios.delete(`http://localhost:3001/${info.source.droppableId}/${info.draggableId}`);
         dispatch(deleteValue([info.source.droppableId, info.source.index]));
+        await axios.post(`http://localhost:3001/${info.destination.droppableId}`,(getAll[info.source.droppableId][info.source.index]))
         dispatch(insertValue([info.destination.droppableId, info.destination.index, getAll[info.source.droppableId][info.source.index]]));
+        
     }
     return (
         <>

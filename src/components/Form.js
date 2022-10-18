@@ -1,7 +1,8 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { addToDo, addDone, addDoing } from "../store/modules/toDoList"
+import { addToDo, addDone, addDoing, getToDo } from "../store/modules/toDoList"
 
 const UpperForms = styled.div`
     width: 40%;
@@ -25,6 +26,7 @@ const Span = styled.span`
     text-align: center;
     width: 25%;
     border: 0.5px solid;
+    background-color: #eee6c4;
 `;
 const Input = styled.input`
     width: 400px;
@@ -33,10 +35,13 @@ const Input = styled.input`
 `;
 const Button = styled.button`
     border-radius: 10px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
     text-align: center;
     width: 40px;
     height: 80px;
     margin: auto;
+    background-color: #eee6c4;
 `;
 const Div = styled.div`
     flex-direction: column;
@@ -46,8 +51,9 @@ const Div = styled.div`
 const Form = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit, setValue } = useForm();
-    const onValid = (data) => {
-        dispatch(addToDo({"title":data.title, "writer":data.writer, "content":data.content, "id":Date.now()}));
+    const onValid = async (data) => {
+        await axios.post(`http://localhost:3001/TO_DO`,({"title":data.title, "writer":data.writer, "content":data.content, "id":Date.now()}))
+        dispatch(getToDo(["TO_DO", await axios.get(`http://localhost:3001/TO_DO`).then(res=>res.data)]))
         setValue("writer", "");
         setValue("title", "");
         setValue("content", "");

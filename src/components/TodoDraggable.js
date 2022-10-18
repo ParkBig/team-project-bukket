@@ -1,6 +1,7 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import React from "react";
 
 const Wrapper = styled.div`
     height: 40px;
@@ -29,4 +30,4 @@ const TodoDraggable = ({dragId , index, dropName}) => {
     );
 }
 
-export default TodoDraggable;
+export default React.memo(TodoDraggable);

@@ -7,6 +7,9 @@ const toDoList = createSlice({
         addToDo: (state, action) => {
             state.value["TO_DO"].push(action.payload);
         },
+        getToDo: (state, action) => {
+            state.value[action.payload[0]] = action.payload[1]
+        },
         addDone: (state, action) => {
             state.value["DONE"].push(action.payload);
         },
@@ -22,5 +25,5 @@ const toDoList = createSlice({
     }
 });
 
-export const { addToDo, addDone, addDoing, insertValue, deleteValue } = toDoList.actions
+export const { addToDo, addDone, addDoing, insertValue, deleteValue, getToDo } = toDoList.actions
 export default toDoList;
