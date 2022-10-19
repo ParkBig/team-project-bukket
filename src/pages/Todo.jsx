@@ -7,14 +7,17 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getToDo } from "../store/modules/toDoList";
 import BackgroundImg from "../img/borad.jpg"
+
 const BgImg = styled.div`
-    background-image: url(${BackgroundImg})
+    width: 100%;
+    height: 100vh;
+    background-image: url(${BackgroundImg});
 `
 const DivPosition = styled.div`
     width: 100%;
     height: 100%;
     text-align: center;
-    display: column;
+    display: flex;
     align-items: center;
     justify-content: center;
 `;
@@ -48,13 +51,13 @@ const Todo = () => {
         <BgImg>
             <DivPosition>
                     <PostIt>
-                    <Link to={"/todoList"} style={{color:"Black", textDecoration:"none"}}>TODO</Link>
-                    <hr />
-                    {
-                        getTODO.map((todo, index) =>(
-                        <TodoList title = {getTODO[index].title} id = {getTODO[index].id}/>
-                        ))
-                    }
+                        <Link to={"/todoList"} style={{color:"Black", textDecoration:"none"}}>TODO</Link>
+                        <hr />
+                        {
+                            getTODO.map((todo, index) =>(
+                            <TodoList title = {getTODO[index].title} id = {getTODO[index].id}/>
+                            ))
+                        }
                     </PostIt>
             </DivPosition>
         </BgImg>

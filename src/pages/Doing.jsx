@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { getToDo } from "../store/modules/toDoList";
 import BackgroundImg from "../img/borad.jpg"
 const BgImg = styled.div`
-    background-image: url(${BackgroundImg})
+    background-image: url(${BackgroundImg});
 `
 const DivPosition = styled.div`
     width: 100%;
