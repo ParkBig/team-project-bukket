@@ -1,8 +1,8 @@
 
 import "../style.css";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getToDo } from "../store/modules/toDoList";
@@ -10,7 +10,6 @@ import { getToDo } from "../store/modules/toDoList";
 
 const DivPosition = styled.div`
     width: 50%;
-    
     justify-content: center;
     align-items: center;
 `;
@@ -42,10 +41,7 @@ const TodoDetail = () => {
     
     const getAll = useSelector(state => state.toDoList.value);
     const getTODO = getAll["TO_DO"];
-    console.log(getTODO);
     const getIndex = getTODO.findIndex(obj => obj.id === uid);
-    
-    
     const getTitle = getTODO[getIndex]?.title;
     const getWriter = getTODO[getIndex]?.writer;
     const getContent = getTODO[getIndex]?.content;

@@ -1,8 +1,8 @@
 // 파이팅!
 import "../style.css";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getToDo } from "../store/modules/toDoList";
@@ -30,7 +30,6 @@ const UserCommentsCollections = styled.div`
 `;
 const DoingDetail = () => {
     const { id } = useParams();
-    const { Comment, handleSubmit, setValue } = useParams();
     const uid = Number(id);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -38,10 +37,10 @@ const DoingDetail = () => {
             dispatch(getToDo(["DOING", (await axios.get("http://localhost:3001/DOING")).data]));
         };
         getTodo();
-    }, [])
+    }, []);
+    
     const getAll = useSelector(state => state.toDoList.value);
     const getTODO = getAll["DOING"];
-    console.log(getTODO);
     const getIndex = getTODO.findIndex(obj => obj.id === uid);
     const getTitle = getTODO[getIndex]?.title;
     const getWriter = getTODO[getIndex]?.writer;

@@ -1,8 +1,8 @@
 // 파이팅!
 import "../style.css";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getToDo } from "../store/modules/toDoList";
@@ -35,13 +35,12 @@ const DoneDetail = () => {
     useEffect(() => {
         const getTodo = async () => {
             dispatch(getToDo(["DONE", (await axios.get("http://localhost:3001/DONE")).data]));
-        };
+        };  
         getTodo();
-    }, [])
+    }, []);
     
     const getAll = useSelector(state => state.toDoList.value);
     const getTODO = getAll["DONE"];
-    console.log(getTODO);
     const getIndex = getTODO.findIndex(obj => obj.id === uid);
     
     
