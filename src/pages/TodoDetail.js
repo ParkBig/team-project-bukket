@@ -1,4 +1,4 @@
-// 파이팅!
+
 import "../style.css";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getToDo } from "../store/modules/toDoList";
+
 
 const DivPosition = styled.div`
     width: 50%;
