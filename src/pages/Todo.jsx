@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getToDo } from "../store/modules/toDoList";
 import BackgroundImg from "../img/borad.jpg"
+
 const BgImg = styled.div`
     background-image: url(${BackgroundImg});
     height: 100vh;
@@ -52,6 +53,7 @@ const Todo = () => {
         <BgImg>
             <DivPosition>
                     <PostIt>
+                    
                     <Link to={"/todoList"} style={TODOStyle}>📝 TODO 📝</Link>
                     <hr />
                     {
