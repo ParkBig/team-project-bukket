@@ -22,6 +22,7 @@ const toDoList = createSlice({
         deleteValue: (state, action) => {
             state.value[action.payload[0]].splice(action.payload[1],1)
         }
+        
     }
 });
 
