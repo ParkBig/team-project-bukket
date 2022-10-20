@@ -23,7 +23,7 @@ const CommandForm = styled.div`
 const Title = styled.div`
     font-size: 36px;
     text-align: left;
-    background-color: #FFE16F
+    background-color: #FFE16F;
 `;
 const UserCommentsCollections = styled.div`
     align-items: flex-start;
