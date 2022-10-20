@@ -1,37 +1,10 @@
 {
   "TO_DO": [
     {
-      "title": "1",
-      "writer": "1",
-      "content": "1",
-      "id": 1666092350020
-    },
-    {
       "title": "key값 주기",
       "writer": "ㅇㅇ",
       "content": "map 에 키값 부여",
       "id": 1666177561743
-    }
-  ],
-  "DOING": [
-    {
-<<<<<<< HEAD
-      "title": "마라톤 완주하기",
-      "writer": "ㅇㅇ",
-      "content": "30분컷",
-      "id": 1666146270982
-    },
-    {
-      "title": "css 정리하기",
-      "writer": "ㅇㅇ",
-      "content": "하면 된대",
-      "id": 1666177588462
-=======
-      "title": "2",
-      "writer": "2",
-      "content": "2",
-      "id": 1666092048466
->>>>>>> refs/remotes/origin/main
     }
   ],
   "DOING": [
@@ -48,18 +21,47 @@
       "id": 1666146270982
     },
     {
+      "title": "2",
+      "writer": "2",
+      "content": "2",
+      "id": 1666231300203
+    },
+    {
+      "title": "헬로우",
+      "writer": "정영훈",
+      "content": "가이즈~",
+      "id": 1666103224427
+    },
+    {
+      "title": "1",
+      "writer": "1",
+      "content": "1",
+      "id": 1666178661394
+    },
+    {
       "title": "5",
       "writer": "5",
       "content": "5",
       "id": 1666078542968
-    }
-  ],
-  "DONE": [
+    },
+    {
+      "title": "css 정리하기",
+      "writer": "ㅇㅇ",
+      "content": "하면 된대",
+      "id": 1666177588462
+    },
     {
       "title": "4",
       "writer": "4",
       "content": "4",
       "id": 1666092357118
+    },
+    {
+      "title": "3",
+      "writer": "3",
+      "content": "3",
+      "id": 1666231315915
     }
-  ]
+  ],
+  "DONE": []
 }

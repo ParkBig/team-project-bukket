@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const DATA_URL = `http://localhost:3001/data`;
+const DATA_URL = `https://week5-assign.herokuapp.com/data`;
 
 export function getData () {
     return axios.get(DATA_URL).then(response=>response.data)

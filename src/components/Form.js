@@ -52,8 +52,8 @@ const Form = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit, setValue } = useForm();
     const onValid = async (data) => {
-        await axios.post(`http://localhost:3001/TO_DO`,({"title":data.title, "writer":data.writer, "content":data.content, "id":Date.now()}))
-        dispatch(getToDo(["TO_DO", await axios.get(`http://localhost:3001/TO_DO`).then(res=>res.data)]))
+        await axios.post(`https://week5-assign.herokuapp.com/TO_DO`,({"title":data.title, "writer":data.writer, "content":data.content, "id":Date.now()}))
+        dispatch(getToDo(["TO_DO", await axios.get(`https://week5-assign.herokuapp.com/TO_DO`).then(res=>res.data)]))
         setValue("writer", "");
         setValue("title", "");
         setValue("content", "");

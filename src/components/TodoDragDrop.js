@@ -83,9 +83,9 @@ const TrashImg = styled.img`
 const TodoDragDrop = () => {
     useEffect(() => {
         const getTodo = async () => {
-            dispatch(getToDo(["DOING", (await axios.get("http://localhost:3001/DOING")).data]));
-            dispatch(getToDo(["TO_DO", (await axios.get("http://localhost:3001/TO_DO")).data]));
-            dispatch(getToDo(["DONE", (await axios.get("http://localhost:3001/DONE")).data]));
+            dispatch(getToDo(["DOING", (await axios.get("https://week5-assign.herokuapp.com/DOING")).data]));
+            dispatch(getToDo(["TO_DO", (await axios.get("https://week5-assign.herokuapp.com/TO_DO")).data]));
+            dispatch(getToDo(["DONE", (await axios.get("https://week5-assign.herokuapp.com/DONE")).data]));
         };
         getTodo();
       }, []);
@@ -94,12 +94,12 @@ const TodoDragDrop = () => {
     const onDragEnd = async (info) => {
         if (!info.destination) return;
         if (info.destination.droppableId === "trash") {
-            await axios.delete(`http://localhost:3001/${info.source.droppableId}/${info.draggableId}`);
+            await axios.delete(`https://week5-assign.herokuapp.com/${info.source.droppableId}/${info.draggableId}`);
             return dispatch(deleteValue([info.source.droppableId, info.source.index]));
         }
-        await axios.delete(`http://localhost:3001/${info.source.droppableId}/${info.draggableId}`);
+        await axios.delete(`https://week5-assign.herokuapp.com/${info.source.droppableId}/${info.draggableId}`);
         dispatch(deleteValue([info.source.droppableId, info.source.index]));
-        await axios.post(`http://localhost:3001/${info.destination.droppableId}`,(getAll[info.source.droppableId][info.source.index]))
+        await axios.post(`https://week5-assign.herokuapp.com/${info.destination.droppableId}`,(getAll[info.source.droppableId][info.source.index]))
         dispatch(insertValue([info.destination.droppableId, info.destination.index, getAll[info.source.droppableId][info.source.index]]));
         
     }

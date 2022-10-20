@@ -23,7 +23,7 @@ const CommandForm = styled.div`
 const Title = styled.div`
     font-size: 36px;
     text-align: left;
-    background-color: #FFE16F
+    background-color: #FFE16F;
 `;
 const UserCommentsCollections = styled.div`
     align-items: flex-start;
@@ -34,7 +34,7 @@ const DoingDetail = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         const getTodo = async () => {
-            dispatch(getToDo(["DOING", (await axios.get("http://localhost:3001/DOING")).data]));
+            dispatch(getToDo(["DOING", (await axios.get("https://week5-assign.herokuapp.com/DOING")).data]));
         };
         getTodo();
     }, []);

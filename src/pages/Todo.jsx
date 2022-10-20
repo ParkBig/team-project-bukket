@@ -37,7 +37,7 @@ const Todo = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         const getTodo = async () => {
-            dispatch(getToDo(["TO_DO", (await axios.get("http://localhost:3001/TO_DO")).data]));
+            dispatch(getToDo(["TO_DO", (await axios.get("https://week5-assign.herokuapp.com/TO_DO")).data]));
         };
         getTodo();
     }, []);

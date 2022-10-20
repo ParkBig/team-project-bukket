@@ -24,9 +24,9 @@ const Summary = () => {
     const dispatch = useDispatch();
     useEffect(()=>{
         const getTodo = async() => {
-            dispatch(getToDo(["TO_DO", (await axios.get("http://localhost:3001/TO_DO")).data]));
-            dispatch(getToDo(["DOING", (await axios.get("http://localhost:3001/DOING")).data]));
-            dispatch(getToDo(["DONE", (await axios.get("http://localhost:3001/DONE")).data]));
+            dispatch(getToDo(["TO_DO", (await axios.get("https://week5-assign.herokuapp.com/TO_DO")).data]));
+            dispatch(getToDo(["DOING", (await axios.get("https://week5-assign.herokuapp.com/DOING")).data]));
+            dispatch(getToDo(["DONE", (await axios.get("https://week5-assign.herokuapp.com/DONE")).data]));
         };
         getTodo();
     }, [])
