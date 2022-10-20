@@ -7,6 +7,7 @@ import { deleteValue, getToDo, insertValue } from "../store/modules/toDoList";
 import trashImg from "../img/icons8-trash-64.png"
 import { useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Wrap = styled.div`
     display: flex;
@@ -110,7 +111,7 @@ const TodoDragDrop = () => {
                         <Form />
                         <Boards>
                             <UpperDroppable>
-                                <Title bgColor="rgba(104, 142, 207, 1)">TODO</Title>
+                                <Link to={"/todoList/TODO"} style={{textDecoration:"none"}}><Title bgColor="rgba(104, 142, 207, 1)">TODO</Title></Link>
                                 <Droppable droppableId="TO_DO">
                                     {(magic) => (
                                         <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
@@ -121,7 +122,7 @@ const TodoDragDrop = () => {
                                 </Droppable>
                             </UpperDroppable>
                             <UpperDroppable>
-                                <Title bgColor="rgba(207, 137, 104, 1)">DOING...</Title>
+                                <Link to={"/todoList/DOING"} style={{textDecoration:"none"}}><Title bgColor="rgba(207, 137, 104, 1)">DOING...</Title></Link>
                                 <Droppable droppableId="DOING">
                                     {(magic) => (
                                         <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
@@ -132,7 +133,7 @@ const TodoDragDrop = () => {
                                 </Droppable>
                             </UpperDroppable>
                             <UpperDroppable>
-                                <Title bgColor="rgba(104, 207, 156, 1)">DONE</Title>
+                                <Link to={"/todoList/DONE"} style={{textDecoration:"none"}}><Title bgColor="rgba(104, 207, 156, 1)">DONE</Title></Link>
                                 <Droppable droppableId="DONE">
                                     {(magic) => (
                                         <UnderDroppable ref={magic.innerRef} {...magic.droppableProps}>
